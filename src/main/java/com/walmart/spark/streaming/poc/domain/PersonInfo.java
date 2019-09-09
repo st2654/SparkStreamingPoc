@@ -5,6 +5,7 @@ import java.util.List;
 
 @Data
 public class PersonInfo {
+    private String _corrupted;
     private String name;
     private String job;
     private String city;
