@@ -1,0 +1,9 @@
+19/09/10 09:49:32 ERROR MicroBatchExecution: Query [id = 6f81ac59-f768-4f3f-a036-e2174ae7d7c7, runId = b66eea78-58b4-43e4-8254-7edee7973fff] terminated with error
+org.apache.spark.sql.AnalysisException: Since Spark 2.3, the queries from raw JSON/CSV files are disallowed when the
+referenced columns only include the internal corrupt record column
+(named _corrupt_record by default). For example:
+spark.read.schema(schema).json(file).filter($"_corrupt_record".isNotNull).count()
+and spark.read.schema(schema).json(file).select("_corrupt_record").show().
+Instead, you can cache or save the parsed results and then send the same query.
+For example, val df = spark.read.schema(schema).json(file).cache() and then
+df.filter($"_corrupt_record".isNotNull).count().;
